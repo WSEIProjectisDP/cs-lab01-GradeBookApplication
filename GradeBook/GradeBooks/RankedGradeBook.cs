@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace GradeBook.GradeBooks
 {
@@ -10,5 +11,41 @@ namespace GradeBook.GradeBooks
         {
             Type = Enums.GradeBookType.Ranked;
         }
+
+
+        public override char GetLetterGrade(double averageGrade)
+        {
+
+            if (Students.Count < 5)
+            {
+                throw new InvalidOperationException();
+            }
+
+            double N = Students.Count * 0.2;
+            int counter = 0;
+            if (Students.Count < 5)
+                throw new InvalidOperationException();
+
+            foreach (var student in Students)
+            {
+                if (averageGrade >= student.AverageGrade)
+                {
+                    counter++;
+                }
+            }
+
+            if (counter > Students.Count - N)
+                return 'A';
+            else if (counter > Students.Count - 2 * N)
+                return 'B';
+            else if (counter > Students.Count - 3 * N)
+                return 'C';
+            else if (counter > Students.Count - 4 * N)
+                return 'D';
+            else
+                return 'F';
+
+        }
+
     }
 }
