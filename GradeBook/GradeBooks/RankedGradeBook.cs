@@ -6,7 +6,7 @@ namespace GradeBook.GradeBooks
 {
     public class RankedGradeBook : BaseGradeBook
     {
-        public RankedGradeBook(string name) : base(name)
+        public RankedGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
             Type = Enums.GradeBookType.Ranked;
         }
@@ -23,8 +23,6 @@ namespace GradeBook.GradeBooks
 
             double N = Students.Count * 0.2;
             int counter = 0;
-            if (Students.Count < 5)
-                throw new InvalidOperationException();
 
             foreach (var student in Students)
             {
